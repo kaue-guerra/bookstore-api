@@ -1,6 +1,8 @@
 package com.guerra.bookstore.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -16,6 +18,7 @@ public class Book implements Serializable {
     private String author;
     private String text;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
