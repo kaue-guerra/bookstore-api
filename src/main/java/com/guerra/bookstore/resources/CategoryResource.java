@@ -1,7 +1,7 @@
 package com.guerra.bookstore.resources;
 
 import com.guerra.bookstore.domain.Category;
-import com.guerra.bookstore.service.CategoriaService;
+import com.guerra.bookstore.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/categories")
-public class CategoriaResource {
+public class CategoryResource {
 
     @Autowired
-    private CategoriaService service;
+    private CategoryService service;
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Category> findById(@PathVariable Integer id) {
