@@ -1,6 +1,7 @@
 package com.guerra.bookstore.service;
 
 import com.guerra.bookstore.domain.Category;
+import com.guerra.bookstore.dtos.CategoryDTO;
 import com.guerra.bookstore.repositories.CategoryRepository;
 import com.guerra.bookstore.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +30,14 @@ public class CategoryService {
         return repository.save(obj);
     }
 
+    public Category update(Integer id, CategoryDTO objDTO) {
+        Category obj = findById(id);
+        if (objDTO.getName() != null){
+            obj.setName(objDTO.getName());
+        }
+        if (objDTO.getDescription() != null){
+            obj.setDescription(objDTO.getDescription());
+        }
+        return repository.save(obj);
+    }
 }
