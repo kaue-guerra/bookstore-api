@@ -13,6 +13,7 @@ public class CategoryDTO implements Serializable {
     private String description;
 
     public CategoryDTO() {
+
         super();
     }
 
