@@ -1,5 +1,6 @@
 package com.guerra.bookstore.dtos;
 
+import com.guerra.bookstore.domain.Book;
 import com.guerra.bookstore.domain.Category;
 
 import java.io.Serializable;
@@ -14,7 +15,7 @@ public class BookDTO implements Serializable {
     private String text;
     private Category category;
 
-    public BookDTO(){
+    public BookDTO(Book obj){
         super();
     }
 
