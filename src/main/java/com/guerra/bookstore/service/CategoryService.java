@@ -5,6 +5,7 @@ import com.guerra.bookstore.dtos.CategoryDTO;
 import com.guerra.bookstore.repositories.CategoryRepository;
 import com.guerra.bookstore.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class CategoryService {
 
     public Category findById(Integer id){
         Optional<Category> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + " Tipo: " + Category.class.getName()));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Categoria não encontrada! Id: " + id + " Tipo: " + Category.class.getName()));
     }
 
     public List<Category> findAll(){
@@ -39,5 +40,14 @@ public class CategoryService {
             obj.setDescription(objDTO.getDescription());
         }
         return repository.save(obj);
+    }
+
+    public void delete(Integer id) {
+        findById(id);
+        try {
+            repository.deleteById(id);
+        }catch (DataIntegrityViolationException e){
+            throw new com.guerra.bookstore.service.exceptions.DataIntegrityViolationException("Categoria não pode ser deletada! Possui livros associados.");
+        }
     }
 }
