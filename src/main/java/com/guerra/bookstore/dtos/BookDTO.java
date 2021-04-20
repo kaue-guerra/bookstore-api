@@ -13,18 +13,17 @@ public class BookDTO implements Serializable {
     private String title;
     private String author;
     private String text;
-    private Category category;
 
-    public BookDTO(Book obj){
+    public BookDTO(){
+
         super();
     }
 
-    public BookDTO(Integer id, String title, String author, String text, Category category) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.text = text;
-        this.category = category;
+    public BookDTO(Book obj) {
+        this.id = obj.getId();
+        this.title = obj.getTitle();
+        this.author = obj.getAuthor();
+        this.text = obj.getText();
     }
 
     public Integer getId() {
@@ -57,13 +56,5 @@ public class BookDTO implements Serializable {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 }

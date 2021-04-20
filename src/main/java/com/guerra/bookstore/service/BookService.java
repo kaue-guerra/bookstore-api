@@ -3,9 +3,10 @@ package com.guerra.bookstore.service;
 import com.guerra.bookstore.domain.Book;
 import com.guerra.bookstore.dtos.BookDTO;
 import com.guerra.bookstore.repositories.BookRepostory;
+import com.guerra.bookstore.service.exceptions.DataIntegrityViolationException;
 import com.guerra.bookstore.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class BookService {
 
     public Book findById(Integer id){
         Optional<Book> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Livro não encontrado! Id: " + id + "Tipo: " + Book.class.getName()));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Livro não encontrado! Id: " + id + " Tipo: " + Book.class.getName()));
     }
 
     public List<Book> findAll(){
@@ -39,9 +40,6 @@ public class BookService {
         if (objDTO.getAuthor() != null ){
             obj.setAuthor(objDTO.getAuthor());
         }
-        if (objDTO.getCategory() != null ){
-            obj.setCategory(objDTO.getCategory());
-        }
         if (objDTO.getText() != null ){
             obj.setText(objDTO.getText());
         }
@@ -49,6 +47,7 @@ public class BookService {
     }
 
     public void delete(Integer id){
+        findById(id);
         repository.deleteById(id);
     }
 }
