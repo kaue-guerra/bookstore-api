@@ -1,7 +1,9 @@
 package com.guerra.bookstore.dtos;
 
 import com.guerra.bookstore.domain.Category;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class CategoryDTO implements Serializable {
@@ -9,7 +11,13 @@ public class CategoryDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
+
+    @NotEmpty(message = "Preencha o campo NOME")
+    @Length(min = 3, max = 100, message = "O campo nome precisa ter no minimo 3 caracteres e no maximo 100")
     private String name;
+
+    @NotEmpty(message = "Preencha o campo Descrição")
+    @Length(min = 3, max = 200, message = "O campo Descrição precisa ter no minimo 3 caracteres e no maximo 200")
     private String description;
 
     public CategoryDTO() {
